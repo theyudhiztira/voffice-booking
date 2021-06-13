@@ -25,7 +25,7 @@
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hi,&nbsp;<b>{{ \Auth::guard('client')->user()->first_name }}</b></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="{{ route('web.home') }}" class="dropdown-item">My Account</a>
-                        <a href="#" class="dropdown-item">Settings</a>
+                        <a href="{{ route('web.settings.index') }}" class="dropdown-item">Settings</a>
                         <div class="dropdown-divider"></div>
                         <a href="{{ route('web.auth.logout') }}"class="dropdown-item">Logout</a>
                     </div>

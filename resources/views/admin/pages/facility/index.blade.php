@@ -45,7 +45,7 @@ vOffice | Facility Data
                                             <a class="btn btn-danger" title="Remove {{ $fc->name }}" href="{{ route('admin.facility.delete', ['id' => $fc->id]) }}">
                                                 <i class="fas fa-fw fa-trash"></i>
                                             </a>
-                                            <a class="btn btn-warning" title="Edit {{ $fc->name }}" href="{{ url('/facility/'.$fc->id) }}">
+                                            <a class="btn btn-warning" title="Edit {{ $fc->name }}" href="{{ url('/admin/facility/'.$fc->id) }}">
                                                 <i class="fas fa-fw fa-pen"></i>
                                             </a>
                                         </td>

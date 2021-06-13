@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Facility
     Route::get('facility', 'Facility\FacilityController@index')->name('admin.facility.index');
-    Route::get('facility/{id}', 'Facility\FacilityController@edit')->name('admin.facility.edit');
+    Route::get('admin/facility/{id}', 'Facility\FacilityController@edit')->name('admin.facility.edit');
     Route::get('facility-create', 'Facility\FacilityController@create')->name('admin.facility.create');
     Route::post('facility', 'Facility\FacilityController@store')->name('admin.facility.store');
     Route::post('facility-update', 'Facility\FacilityController@update')->name('admin.facility.update');
@@ -94,25 +94,7 @@ Route::group(['middleware' => ['client']], function () {
     Route::get('book-room', 'Booking\BookingController@index')->name('web.booking');
     Route::get('facility/{id}', 'Facility\FacilityController@webShow')->name('web.facility');
     Route::post('facility-book', 'Facility\FacilityController@bookFacility')->name('web.facility.book');
-});
-
-
-// Route::get('asdasd', function() {
-//     return App\Models\User::create([
-//         'name' => 'Pandu',
-//         'email' => 'theyudhiztira@gmail.com',
-//         'password' => Hash::make('sherlyda101')
-//     ]);
-// })->name('admin.client.index');
-
-Route::get('iimel', function(){
-    Mail::send('admin.emails.user_registered', [
-        'name' => 'test',
-        'password' => 'test'
-    ], function ($message)  {
-        $message->from('cs@voffice.co.id', 'vOffice');
-        $message->sender('cs@voffice.co.id', 'vOffice');
-        $message->to('theyudhiztira@gmail.com', 'Pandu Yudhistira');
-        $message->subject('Your Access to vOffice Booking Manager');
-    });
+    Route::get('account-settings' , 'Client\ClientController@publicIndex')->name('web.settings.index');
+    Route::post('personal-info' , 'Client\ClientController@changePersonalInfo')->name('account.change.personal');
+    Route::post('password' , 'Client\ClientController@changePassword')->name('account.change.password');
 });
