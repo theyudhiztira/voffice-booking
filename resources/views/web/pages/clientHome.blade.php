@@ -75,7 +75,6 @@
                                         <th>Credit Used</th>
                                         <th>Booking Date</th>
                                         <th>Booked At</th>
-                                        <th>Action</th>
                                     </thead>
                                     <tbody>
                                         @foreach ($bookings as $booking)
@@ -85,9 +84,6 @@
                                                 <td>{{ $booking->credit_used }}</td>
                                                 <td>{{ $booking->booking_date }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($booking->created_at)->isoFormat('YYYY MMMM DDDo HH:mm') }}</td>
-                                                <td>
-                                                    <a class="btn btn-success" href="">View</a>
-                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

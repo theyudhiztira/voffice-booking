@@ -41,7 +41,7 @@ vOffice | Facility {{ $facility->facility_name }}
             </div>
             <div class="col-12">
                 <ul class="list-unstyled">
-                    <li><i class="fa fa-users"></i> : 5 Pax</li>
+                    <li><i class="fa fa-users"></i> : {{ $facility->capacity }} Pax</li>
                     <li><i class="fa fa-credit-card"></i> : {{ $facility->deduction_rate }} Credit(s) / Hour</li>
                     <li><b>{{  $facility->location_details->name }}</b></li>
                     <li>
