@@ -1,7 +1,7 @@
 @extends('web.app')
 
 @section('title')
-    vOffice | Client Dashboard
+vOffice | Client Dashboard
 @endsection
 
 @section('content')
@@ -40,12 +40,12 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($plans as $plan)
-                                            <tr>
-                                                <td>{{ $plan->id }}</td>
-                                                <td>{{ $plan->product->name }}</td>
-                                                <td>{{ $plan->credits }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($plan->next_renew_date)->isoFormat('YYYY MMM DDDo') }}</td>
-                                            </tr>
+                                        <tr>
+                                            <td>{{ $plan->id }}</td>
+                                            <td>{{ $plan->product->name }}</td>
+                                            <td>{{ $plan->credits }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($plan->next_renew_date)->isoFormat('YYYY MMM DD') }}</td>
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -78,13 +78,13 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($bookings as $booking)
-                                            <tr>
-                                                <td>{{ $booking->id }}</td>
-                                                <td>{{ $booking->facility->facility_name }}</td>
-                                                <td>{{ $booking->credit_used }}</td>
-                                                <td>{{ $booking->booking_date }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($booking->created_at)->isoFormat('YYYY MMMM DDDo HH:mm') }}</td>
-                                            </tr>
+                                        <tr>
+                                            <td>{{ $booking->id }}</td>
+                                            <td>{{ $booking->facility->facility_name }}</td>
+                                            <td>{{ $booking->credit_used }}</td>
+                                            <td>{{ $booking->booking_date }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($booking->created_at)->isoFormat('YYYY MMMM DD HH:mm') }}</td>
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -119,17 +119,21 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($transactions as $trx)
-                                            <tr>
-                                                <td>{{ $trx->id }}</td>
-                                                <td>{{ $trx->product->name }}</td>
-                                                <td>IDR {{ number_format($trx->amount_due) }}</td>
-                                                <td>{!! empty($trx->date_paid) ? "<b class='text-danger'>Unpaid</b><span class='d-none'>Unpaid</span>" : "<b class='text-success'>Paid</b><span class='d-none'>Paid</span>" !!}</td>
-                                                <td>{{ $trx->date_paid ? \Carbon\Carbon::parse($trx->date_paid)->isoFormat('YYYY MMM DDDo') : "-" }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($trx->created_at)->isoFormat('YYYY MMM DDDo HH:mm') }}</td>
-                                                <td>
-                                                    {!! empty($trx->date_paid) ? "<a class='btn btn-success' href='".route('web.transaction.detail', ['id' => $trx->id])."'>View</a>" : '<button class="btn btn-secondary" disabled>View</button>' !!}
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td>{{ $trx->id }}</td>
+                                            <td>{{ $trx->product && $trx->product->name }}</td>
+                                            <td>IDR {{ number_format($trx->amount_due) }}</td>
+                                            <td>{!! empty($trx->date_paid) ? "<b class='text-danger'>Unpaid</b><span class='d-none'>Unpaid</span>" : "<b class='text-success'>Paid</b><span class='d-none'>Paid</span>" !!}</td>
+                                            <td>{{ $trx->date_paid ? \Carbon\Carbon::parse($trx->date_paid)->isoFormat('YYYY MMM DD') : "-" }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($trx->created_at)->isoFormat('YYYY MMM DD HH:mm') }}</td>
+                                            <td>
+                                                @if(empty($trx->date_paid))
+                                                <a class='btn btn-success' href='<?= route("web.transaction.detail", ["id" => $trx->id]) ?>'>View</a>
+                                                @else
+                                                <button class="btn btn-secondary" disabled>View</button>
+                                                @endif
+                                            </td>
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -144,20 +148,20 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.23/b-1.6.5/b-html5-1.6.5/r-2.2.6/sb-1.0.1/sp-1.2.2/datatables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.23/b-1.6.5/b-html5-1.6.5/r-2.2.6/sb-1.0.1/sp-1.2.2/datatables.min.css" />
 @endsection
 
 @section('js')
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/b-1.6.5/b-html5-1.6.5/r-2.2.6/sb-1.0.1/sp-1.2.2/datatables.min.js"></script>
-    <script>
-        $(document).ready(() => {
-            $('table').DataTable();
-        })
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/b-1.6.5/b-html5-1.6.5/r-2.2.6/sb-1.0.1/sp-1.2.2/datatables.min.js"></script>
+<script>
+    $(document).ready(() => {
+        $('table').DataTable();
+    })
 
-        const disableUser = (userId) => {
-            return alert(userId);
-        }
-    </script>
+    const disableUser = (userId) => {
+        return alert(userId);
+    }
+</script>
 @endsection
