@@ -77,6 +77,7 @@ Route::get('register', 'Web\WebController@register')->name('web.register');
 Route::get('about-us', 'Web\WebController@aboutUs')->name('web.about');
 Route::get('pricing', 'Web\WebController@pricing')->name('web.pricing');
 Route::get('buy/{id}', 'Order\OrderController@buy')->name('web.buy');
+Route::get('report-download', 'Booking\BookingController@downloadReport')->name('admin.report.pdf');
 
 Route::post('doRegister', 'Auth\AuthController@clientRegister')->name('web.auth.register');
 Route::post('doLogin', 'Auth\AuthController@clientLogin')->name('web.auth.login');

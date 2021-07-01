@@ -24,4 +24,14 @@ class BookingController extends Controller
             'bookings' => $booking
         ]);
     }
+
+    public function downloadReport()
+    {
+      $booking = \App\Models\Booking::all();
+      
+      $pdf = \PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif'])->loadView('admin.pdf.report', [
+          'bookings' => $booking
+      ])->setPaper('a4', 'landscape');
+      return $pdf->download('booking-report.pdf');
+    }
 }

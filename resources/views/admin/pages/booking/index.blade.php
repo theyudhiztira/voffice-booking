@@ -32,7 +32,6 @@ return $trimmedTime.":00 - ".($trimmedTime+1).":00";
                                 </thead>
                                 <tbody>
                                     @foreach ($bookings as $b)
-
                                     <tr>
                                         <td>{{ $b->id }}</td>
                                         <td>{{ $b->facility->facility_name }}</td>
@@ -55,10 +54,29 @@ return $trimmedTime.":00 - ".($trimmedTime+1).":00";
                                 </tbody>
                             </table>
                         </div>
+                        <div class="col-12">
+                          <a href='{{route("admin.report.pdf")}}' class='btn btn-success w-100 mt-3'>Download Report</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </div>
+@endsection
+
+
+@section('css')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.23/b-1.6.5/b-html5-1.6.5/r-2.2.6/sb-1.0.1/sp-1.2.2/datatables.min.css" />
+@endsection
+
+@section('js')
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/b-1.6.5/b-html5-1.6.5/r-2.2.6/sb-1.0.1/sp-1.2.2/datatables.min.js"></script>
+<script>
+    $(document).ready(() => {
+        $('table').DataTable();
+    })
+</script>
 @endsection
