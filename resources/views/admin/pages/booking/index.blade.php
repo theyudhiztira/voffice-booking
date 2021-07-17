@@ -55,7 +55,7 @@ return $trimmedTime.":00 - ".($trimmedTime+1).":00";
                             </table>
                         </div>
                         <div class="col-12">
-                          <a href='{{route("admin.report.pdf")}}' class='btn btn-success w-100 mt-3'>Download Report</a>
+                            <a href='{{route("admin.report.pdf")}}' class='btn btn-success w-100 mt-3'>Download Report</a>
                         </div>
                     </div>
                 </div>
