@@ -89,6 +89,7 @@ Route::group(['middleware' => ['client']], function () {
 
     //Auth for Client
     Route::get('doLogout', 'Auth\AuthController@clientLogout')->name('web.auth.logout');
+    Route::get('ticket/{id}', 'Booking\BookingController@ticketView')->name('web.booking.ticket');
 
     Route::get('transaction/{id}', 'Order\OrderController@orderPage')->name('web.transaction.detail');
     Route::post('transaction/upload-payment-proof', 'Order\OrderController@uploadPaymentProof')->name('web.transaction.uploadPaymentProof');

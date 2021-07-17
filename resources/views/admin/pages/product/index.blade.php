@@ -32,7 +32,7 @@ vOffice | Product Data
                             <tbody>
                                 @foreach ($products as $pd)
                                     <tr>
-                                        <td style="text-align: center;">{{ $pd->id }}</td>
+                                        <td style="text-align: center;">PRD{{ sprintf("%03d", $pd->id)}}</td>
                                         <td>{{ $pd->name }}</td>
                                         <td>IDR {{ number_format($pd->price) }}<span class="d-none">{{ $pd->price }}</span></td>
                                         <td>{{ $pd->credit }}</td>

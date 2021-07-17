@@ -59,7 +59,7 @@ vOffice | Facility {{ $facility->facility_name }}
                         <h5 class="font-weight-bolder text-dark">Select Booking Date :</h5>
                     </div>
                     <div class="col-12">
-                        <input type="date" class="form-control" placeholder="2020-01-02" name="date" value="{{ old('date') }}" required>
+                        <input type="text" class="form-control" placeholder="2020-01-02" name="date" value="{{ app('request')->input('date') ? app('request')->input('date') : old('date') }}" required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 row">
@@ -95,7 +95,7 @@ vOffice | Facility {{ $facility->facility_name }}
                         @endphp
                         @if ($data)
                         <div class="col-6 col-md-3 mb-3">
-                            <label class="w-100 rounded p-2 d-flex flex-column bg-gradient-secondary"
+                            <label class="w-100 rounded p-2 d-flex flex-column bg-gradient-secondary booked"
                                 style="height: 150px;">
                                 <input type="checkbox" name="schedule[]" value="{{ $i }}" disabled>
                                 <h4 class="text-white text-center position-absolute" style="top: 35%; left: 38%;">
@@ -104,7 +104,7 @@ vOffice | Facility {{ $facility->facility_name }}
                         </div>
                         @else
                         <div class="col-6 col-md-3 mb-3">
-                            <label class="w-100 rounded p-2 d-flex flex-column bg-gradient-primary" style="height: 150px;">
+                            <label class="w-100 rounded p-2 d-flex flex-column bg-gradient-primary available" style="height: 150px;">
                                 <input type="checkbox" name="schedule[]" value="{{ $i }}">
                                 <h4 class="text-white text-center position-absolute" style="top: 35%; left: 38%;">
                                     {{ strlen(substr($i, 0, -2)) < 2 ? '0'.substr($i, 0, -2) : substr($i, 0, -2) }}:00</h4>
@@ -115,7 +115,7 @@ vOffice | Facility {{ $facility->facility_name }}
                 @else
                     @for ($i = $facility->start_time; $i <= $facility->end_time; $i+=100)
                         <div class="col-6 col-md-3 mb-3">
-                            <label class="w-100 rounded p-2 d-flex flex-column bg-gradient-primary"
+                            <label class="w-100 rounded p-2 d-flex flex-column bg-gradient-primary available"
                                 style="height: 150px;">
                                 <input type="checkbox" name="schedule[]" value="{{ $i }}">
                                 <h4 class="text-white text-center position-absolute" style="top: 35%; left: 38%;">
@@ -145,6 +145,13 @@ vOffice | Facility {{ $facility->facility_name }}
         min-height: 350px;
     }
 
+    .available:hover{
+      cursor: pointer;
+    }
+
+    .booked:hover{
+      cursor: not-allowed;
+    }
 </style>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css" rel="stylesheet">
 @endsection
@@ -153,11 +160,15 @@ vOffice | Facility {{ $facility->facility_name }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/i18n/datepicker.en-US.min.js"></script>
     <script>
-        $('input[type=date]').datepicker({
+        $('input[name=date]').datepicker({
             format: 'yyyy-mm-dd',
-            date: "{{ $now }}",
+            date: "{{ app('request')->input('date') ? app('request')->input('date') : $now }}",
             startDate: "{{ $now }}",
             endDate: "{{ \Carbon\Carbon::parse($now)->addDays(30)->isoFormat('YYYY-MM-DD') }}"
+        });
+
+        $('input[name=date]').change((el) => {
+          window.location.replace(window.location.href.split('?')[0]+'?date='+el.target.value)
         });
     </script>
 @endsection

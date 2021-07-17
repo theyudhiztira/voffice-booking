@@ -41,7 +41,7 @@ vOffice | Client Dashboard
                                     <tbody>
                                         @foreach ($plans as $plan)
                                         <tr>
-                                            <td>{{ $plan->id }}</td>
+                                            <td>MR{{ sprintf("%03d", $plan->id) }}</td>
                                             <td>{{ $plan->product->name }}</td>
                                             <td>{{ $plan->credits }}</td>
                                             <td>{{ \Carbon\Carbon::parse($plan->next_renew_date)->isoFormat('YYYY MMM DD') }}</td>
@@ -75,15 +75,17 @@ vOffice | Client Dashboard
                                         <th>Credit Used</th>
                                         <th>Booking Date</th>
                                         <th>Booked At</th>
+                                        <th>View</th>
                                     </thead>
                                     <tbody>
                                         @foreach ($bookings as $booking)
                                         <tr>
-                                            <td>{{ $booking->id }}</td>
+                                            <td>VOJKT/{{str_replace('-', '/', substr($booking->booking_date, 5, 7))}}/{{$booking->id}}</td>
                                             <td>{{ $booking->facility->facility_name }}</td>
                                             <td>{{ $booking->credit_used }}</td>
                                             <td>{{ $booking->booking_date }}</td>
                                             <td>{{ \Carbon\Carbon::parse($booking->created_at)->isoFormat('YYYY MMMM DD HH:mm') }}</td>
+                                            <td><a target="_blank" class='btn btn-success' href='{{route("web.booking.ticket", ["id" => $booking->id])}}'>View</a></td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -120,7 +122,7 @@ vOffice | Client Dashboard
                                     <tbody>
                                         @foreach ($transactions as $trx)
                                         <tr>
-                                            <td>{{ $trx->id }}</td>
+                                            <td>INV{{ sprintf("%03d", $trx->id) }}</td>
                                             <td>{{ $trx->product && $trx->product->name }}</td>
                                             <td>IDR {{ number_format($trx->amount_due) }}</td>
                                             <td>{!! empty($trx->date_paid) ? "<b class='text-danger'>Unpaid</b><span class='d-none'>Unpaid</span>" : "<b class='text-success'>Paid</b><span class='d-none'>Paid</span>" !!}</td>

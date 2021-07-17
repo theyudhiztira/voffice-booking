@@ -33,7 +33,7 @@ vOffice | Facility Data
                             <tbody>
                                 @foreach ($facilities as $fc)
                                     <tr>
-                                        <td style="text-align: center;">{{ $fc->id }}</td>
+                                        <td style="text-align: center;">F{{ sprintf("%03d", $fc->id) }}</td>
                                         <td>{{ $fc->facility_name }}</td>
                                         <td>{{ $fc->location_details->name }}</td>
                                         <td style="width: 9%; text-align: center;">{{ $fc->capacity }} Pax</td>

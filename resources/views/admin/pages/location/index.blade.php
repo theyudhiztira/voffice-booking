@@ -30,7 +30,7 @@ vOffice | Location Data
                             <tbody>
                                 @foreach ($locations as $loc)
                                     <tr>
-                                        <td>{{ $loc->id }}</td>
+                                        <td>L{{ sprintf("%03d", $loc->id) }}</td>
                                         <td>{{ $loc->name }}</td>
                                         <td style="width: 31% !important;"><span data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $loc->address }}">{{ $loc->address }}</span></td>
                                         <td style="width: 19%; text-align: center;"><img class="img img-fluid w-75" src="{{ asset('img/locations/'.$loc->image) }}"></td>

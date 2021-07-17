@@ -28,7 +28,7 @@ vOffice | Order Data
                         <tbody>
                             @foreach ($orders as $order)
                             <tr>
-                                <td class="text-center" style="width: 3%;">{{ $order->id }}</td>
+                                <td class="text-center" style="width: 3%;">INV{{ sprintf("%03d", $order->id) }}</td>
                                 <td style="width: 13%;">{{ $order->client->first_name }} {{ $order->client->last_name }}</td>
                                 <td style="width: 15%;">{{ $order->product ? $order->product->name : 'N/A (Deleted)' }}</td>
                                 <td style="width: 10%;">IDR {{ number_format($order->amount_due) }}</td>

@@ -6,14 +6,6 @@
 
 @section('content')
 <section class="container my-5">
-    <div class="row">
-        <div class="col-12">
-            <h1>Choose Booking Date</h1>
-        </div>
-        <div class="col-12 form-group">
-
-        </div>
-    </div>
     <div class="row mb-4">
         <div class="col-12 text-center">
             <h1>Choose Meeting Room</h1>

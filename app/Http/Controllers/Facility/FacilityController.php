@@ -132,7 +132,7 @@ class FacilityController extends Controller
         return redirect(route('admin.facility.index'));
     }
 
-    public function webShow($id)
+    public function webShow($id, Request $req)
     {
         $facility = \App\Models\Facility::find($id);
 
@@ -144,7 +144,7 @@ class FacilityController extends Controller
         ->where('expiry_date', '>', \Carbon\Carbon::now("Asia/Jakarta")->isoFormat('YYYY-MM-DD'))
         ->get();
 
-        $schedule = \App\Models\FacilitySchedule::where('date', \Carbon\Carbon::now("Asia/Jakarta")->isoFormat('YYYY-MM-DD'))
+        $schedule = \App\Models\FacilitySchedule::where('date', $req->has('date') ? $req->date : \Carbon\Carbon::now("Asia/Jakarta")->isoFormat('YYYY-MM-DD'))
         ->where('facility_id', $facility->id)
         ->first();
 
@@ -186,7 +186,7 @@ class FacilityController extends Controller
         $booking->save();
 
         $schedule = \App\Models\FacilitySchedule::where('facility_id', $req->facility)
-        ->where('date', \Carbon\Carbon::now("Asia/Jakarta")->isoFormat('YYYY-MM-DD'))
+        ->where('date', $req->date)
         ->first();
 
         $toSave = [];

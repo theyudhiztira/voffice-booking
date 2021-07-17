@@ -33,7 +33,7 @@ return $trimmedTime.":00 - ".($trimmedTime+1).":00";
                                 <tbody>
                                     @foreach ($bookings as $b)
                                     <tr>
-                                        <td>{{ $b->id }}</td>
+                                        <td>VOJKT/{{str_replace('-', '/', substr($b->booking_date, 5, 7))}}/{{$b->id}}</td>
                                         <td>{{ $b->facility->facility_name }}</td>
                                         <td>{{ $b->facility->location_details->name }}</td>
                                         <td>{{ $b->client->first_name }} {{ $b->client->last_name }}</td>

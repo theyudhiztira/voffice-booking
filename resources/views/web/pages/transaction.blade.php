@@ -16,7 +16,7 @@ vOffice | Transaction
             <div class="col-12">
                 <div class="card shadow">
                     <div class="card-header">
-                        <h5>Invoice ID : {{ $transaction->id }}</h5>
+                        <h5>Invoice ID : INV{{ sprintf("%03d", $transaction->id) }}</h5>
                     </div>
                     <div class="card-body">
                         <div class="row mb-3">

@@ -34,4 +34,13 @@ class BookingController extends Controller
       ])->setPaper('a4', 'landscape');
       return $pdf->download('booking-report.pdf');
     }
+
+    public function ticketView($id)
+    {
+      $booking = \App\Models\Booking::find($id);
+
+      return view('web.ticket', [
+        'data' => $booking
+      ]);
+    }
 }
