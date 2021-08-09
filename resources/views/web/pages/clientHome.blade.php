@@ -11,11 +11,19 @@ vOffice | Client Dashboard
             <div class="col-12">
                 <h3>Welcome, <b>{{ \Auth::guard('client')->user()->first_name }} {{ \Auth::guard('client')->user()->last_name }}</b></h3>
             </div>
-            <div class="row">
-                <div class="col-12 px-4">
-                    <a class="btn btn-primary p-3" href="{{ route('web.booking') }}"><i class="fas fa-fw fa-calendar-alt"></i> Book a Room</a>
-                    <a class="btn btn-warning p-3" href="{{ route('web.pricing') }}"><i class="fas fa-fw fa-shopping-basket"></i> Buy a Plan</a>
-                </div>
+            <div class="col-12 px-3">
+              <a class="btn btn-primary p-3" href="{{ route('web.booking') }}"><i class="fas fa-fw fa-calendar-alt"></i> Book a Room</a>
+              <a class="btn btn-warning p-3" href="{{ route('web.pricing') }}"><i class="fas fa-fw fa-shopping-basket"></i> Buy a Plan</a>
+            </div>
+            <div class="col-12 mt-3 {!! session()->get('new_user') ? 'd-block' : 'd-none' !!}">
+              <div class="alert alert-primary">
+                <h3>How to book a meeting room :</h3>
+                <ul>
+                  <li>Buy a plan by clicking <b>"Buy Plan"</b> button above</li>
+                  <li>Pay your invoice</li>
+                  <li>Book the preferred meeting room by clicking <b>"Book a Room"</b> button above</li>
+                </ul>
+              </div>
             </div>
         </div>
     </div>

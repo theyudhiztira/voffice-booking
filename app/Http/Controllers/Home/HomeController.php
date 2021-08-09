@@ -24,7 +24,8 @@ class HomeController extends Controller
         return view('web.pages.clientHome', [
             'plans' => $plan,
             'bookings' => $booking,
-            'transactions' => $transaction
+            'transactions' => $transaction,
+            'new_user' => session()->get('new_user')
         ]);
     }
 }
